@@ -1,0 +1,9 @@
+h2{
+    font-size: medium;
+    color: black;
+}
+input[name='label2']{
+    margin-left: 200px;
+    margin-top: 500px;
+}
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vanessa Demo Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+<div>
+  <body>
+    <script src="mytoolkit.js" type="module"></script>
+  </body>
+</div>
+<div>
+  <body>
+    <h2>Radio Button</h2>
+    <form>
+      <input type="radio" name="choice" value="First Button">
+      <input type="text" name="label" placeholder="Type in Label for Button 1"><br/>
+      <input type="radio" name="choice" value="Second Button"> 
+      <input type="text" name="label" placeholder="Type in Label for Button 2"><br/>
+      <input type="button" id="btn" value="Submit Selection"><br/>
+  </form>
+  <script>
+      const btn = document.querySelector('#btn');
+
+      // handle click button
+      btn.onclick = function () {
+          const rbs = document.querySelectorAll('input[name="choice"]');
+          let selectedValue;
+          for (const rb of rbs) {
+              if (rb.checked) {
+                  selectedValue = rb.value;
+                  break;
+              }
+          }
+          console.log(selectedValue + " Clicked")
+          console.log("Radio Button: State Changed")
+      };
+  </script>
+  </body>
+</div>
+<div id="container"></div>
+
+</html>
