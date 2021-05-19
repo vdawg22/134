@@ -74,7 +74,7 @@ SVG.on(document, 'DOMContentLoaded', function(){
           },
           stateChanged: function(eventHandler){
             stateEvent = eventHandler 
-            console.log("State Changed")
+            //console.log("State Changed")
           },
           onclick: function(eventHandler){
               clickEvent = eventHandler
@@ -175,7 +175,7 @@ SVG.on(document, 'DOMContentLoaded', function(){
   },
     stateChanged: function(eventHandler){
       stateEvent = eventHandler 
-      console.log("State Changed")
+      //console.log("State Changed")
     },
     onclick: function(eventHandler){
         clickEvent = eventHandler
@@ -250,7 +250,7 @@ var Scrollbar = function(draw){
       },
       stateChanged: function(eventHandler){
         stateEvent = eventHandler 
-        console.log("State Changed")
+        //console.log("State Changed")
       },
       onclick: function(eventHandler){
           clickEvent = eventHandler
@@ -289,27 +289,51 @@ var Scrollbar = function(draw){
 //creates textbox
 var textbox = function(draw){
 var input = document.querySelector('input[type=text]')
-var draw = SVG().addTo('#drawing').viewbox(0, 0, 300, 140)
+
 var text = draw.text(function(add) {
 	add.tspan( input.value )
 })
+var clickEvent = null
+var stateEvent = null
+var defaultState = "Unchanged"
+
+text.mouseover(function(){
+  defaultState = "hover"
+  console.log("Mouse Over in Textbox")
+})
+text.mouseout(function(){
+  defaultState = "idle"
+  console.log("Mouse Out in Textbox")
+})
+text.mousedown(function(){
+  defaultState = "pressed"
+  console.log("Mouse Down in Textbox")
+})
+text.mouseup(function(){
+  if (defaultState == "pressed"){
+    if(clickEvent != null)
+        clickEvent(event)
+  }
+  defaultState = "up"
+  console.log("Mouse Up in Textbox")
+})
+
   return {
     move: function(x, y) {
-        textbox.move(x, y);
+        text.move(x, y);
     },
     stateChanged: function(eventHandler){
       stateEvent = eventHandler 
-      console.log("State Changed")
+      //console.log("State Changed")
     },
     onclick: function(eventHandler){
         clickEvent = eventHandler
-        console.log("Textbox clicked")
     },
     src: function(){
         return line;
     },
     setId: function(id){
-      textbox.attr("id", id)
+      text.attr("id", id)
     }
   }
 }
@@ -319,25 +343,20 @@ function updateText(textPath) {
 	}				
 }
 //display textbox
-var scroll = new Scrollbar(draw)
-scroll.setId("scroll")
-scroll.move(900,10)
-
-console.log("Scrollbar Unmoved")
-
-scroll.onclick(function(event){
-  scroll.move(900,50)
+var txt = new textbox(draw)
+txt.setId("text")
+console.log("Textbox Unchanged")
+txt.onclick(function(event){
   console.log(event)
   console.log(event.target)
-  console.log("Scrollbar State: Moved Down")
+  console.log("TextBox State: Changed")
 })
-scroll.stateChanged(function(event){
+txt.stateChanged(function(event){
   console.log(event)
-  console.log("state changed for Scrollbar")
+  console.log("state changed for Textbox")
 })
-scroll.stateChanged(function(event){
+txt.stateChanged(function(event){
   //navigate to a new page
 })
-
 
 });
