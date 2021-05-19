@@ -1,6 +1,7 @@
 ## Welcome to Vanessa's Toolkit
 
 You can use the [editor on GitHub](https://github.com/vlebel/134/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+On this page you will find some widgets that I created for assignment 3. 
 
 
 
