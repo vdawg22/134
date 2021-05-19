@@ -1,3 +1,27 @@
+/**
+ * @param  {} document
+ * @param  {} 'DOMContentLoaded'
+ * @param  {} function(
+ * @param  {} {vardraw=SVG(
+ * @param  {} .addTo('body'
+ * @param  {} .size('1000px'
+ * @param  {} '1000px'
+ * @param  {} ;varwindow=draw.group(
+ * @param  {} ;window.rect(400
+ * @param  {} 400
+ * @param  {} .stroke("orange"
+ * @param  {} .fill("white"
+ * @param  {} window.click(function(event
+ * @param  {} {console.log("Window"
+ * @param  {} console.log(event
+ * @param  {} }
+ * @param  {} varButton=function(draw
+ * @param  {} {varrect=draw.rect(100
+ * @param  {} 50
+ * @param  {} .fill('red'
+ * @param  {} varclickEvent=nullvarstateEvent=nullvardefaultState="idle"rect.mouseover(function(
+ * @param  {'blue'}} {this.fill({color
+ */
 import {SVG} from './svg.min.js';
 
 SVG.on(document, 'DOMContentLoaded', function(){
@@ -262,6 +286,58 @@ var Scrollbar = function(draw){
     //navigate to a new page
   })
 
+//creates textbox
+var textbox = function(draw){
+var input = document.querySelector('input[type=text]')
+var draw = SVG().addTo('#drawing').viewbox(0, 0, 300, 140)
+var text = draw.text(function(add) {
+	add.tspan( input.value )
+})
+  return {
+    move: function(x, y) {
+        textbox.move(x, y);
+    },
+    stateChanged: function(eventHandler){
+      stateEvent = eventHandler 
+      console.log("State Changed")
+    },
+    onclick: function(eventHandler){
+        clickEvent = eventHandler
+        console.log("Textbox clicked")
+    },
+    src: function(){
+        return line;
+    },
+    setId: function(id){
+      textbox.attr("id", id)
+    }
+  }
+}
+function updateText(textPath) {
+	return function() {
+		textPath.tspan(this.value)
+	}				
+}
+//display textbox
+var scroll = new Scrollbar(draw)
+scroll.setId("scroll")
+scroll.move(900,10)
+
+console.log("Scrollbar Unmoved")
+
+scroll.onclick(function(event){
+  scroll.move(900,50)
+  console.log(event)
+  console.log(event.target)
+  console.log("Scrollbar State: Moved Down")
+})
+scroll.stateChanged(function(event){
+  console.log(event)
+  console.log("state changed for Scrollbar")
+})
+scroll.stateChanged(function(event){
+  //navigate to a new page
+})
 
 
 });

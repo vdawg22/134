@@ -7,3 +7,16 @@ input[name='label2']{
     margin-top: 500px;
 }
 
+tspan {
+	fill: #111010;
+	stroke: rgb(2, 2, 2);
+	stroke-width: 0.85;
+  font-family: 'Inconsolata';
+}
+input[type=text] {
+	width: 100%;
+  font-family: 'Inconsolata';
+  font-size: 14px;
+  outline: none;
+  color: #666;
+}
